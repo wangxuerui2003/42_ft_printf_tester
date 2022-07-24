@@ -6,7 +6,7 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:30:12 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/24 10:01:04 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 13:07:55 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ void	init_status(t_status *status)
 
 int	should_test(t_flags *flags, t_status *status)
 {
-	if (flags->test_num == 0)
-		return (1);
 	if (flags->test_num != 0 && flags->test_num == status->current_test)
+		return (1);
+	if (flags->should_test == 0)
+		return (0);
+	if (flags->test_num == 0)
 		return (1);
 	return (0);
 }
@@ -51,7 +53,7 @@ void	get_result(t_result *result, int fd[2])
 int	check_result(t_status *status, int exitpid,
 	t_result *stdresult, t_result *userresult)
 {
-	if (exitpid != 0)
+	if (exitpid != 0 && exitpid != LEAKS_ERROR)
 	{
 		ft_putstr_fd(RED, 1);
 		if (exitpid == SIGSEGV)
@@ -73,9 +75,19 @@ int	check_result(t_status *status, int exitpid,
 		&& stdresult->return_value == userresult->return_value)
 	{
 		ft_putstr_fd(GREEN "OK! " RESET, STDOUT_FILENO);
+		if (exitpid == LEAKS_ERROR)
+		{
+			ft_putstr_fd(RED "LEAKS!" RESET, 1);
+			return (0);
+		}
 		return (1);
 	}
 	ft_putstr_fd(RED "KO! " RESET, STDOUT_FILENO);
+	if (exitpid == LEAKS_ERROR)
+	{
+		ft_putstr_fd(RED "LEAKS!" RESET, 1);
+		return (0);
+	}
 	print_help(status, stdresult, userresult);
 	sleep(1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:09:14 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/24 10:38:51 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 13:04:53 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ static void	set_no_flags(t_flags *flags)
 	flags->c = 0;
 	flags->p = 0;
 	flags->d = 0;
+	flags->u = 0;
 	flags->i = 0;
 	flags->x = 0;
 	flags->X = 0;
 	flags->percent = 0;
 	flags->bonus = 1;
+	flags->should_test = 0;
 }
 
 static void	set_default(t_flags *flags)
@@ -33,11 +35,13 @@ static void	set_default(t_flags *flags)
 	flags->c = 1;
 	flags->p = 1;
 	flags->d = 1;
+	flags->u = 1;
 	flags->i = 1;
 	flags->x = 1;
 	flags->X = 1;
 	flags->percent = 1;
 	flags->bonus = 1;
+	flags->should_test = 1;
 }
 
 static void	get_specific_flags(int ac, char **av, t_flags *flags)
@@ -53,6 +57,8 @@ static void	get_specific_flags(int ac, char **av, t_flags *flags)
 			flags->p = 1;
 		if (strcmp(av[ac], "d") == 0)
 			flags->d = 1;
+		if (strcmp(av[ac], "u") == 0)
+			flags->u = 1;
 		if (strcmp(av[ac], "i") == 0)
 			flags->i = 1;
 		if (strcmp(av[ac], "x") == 0)
@@ -72,10 +78,11 @@ static void	parse_flags(int ac, char **av, t_flags *flags)
 	}
 	if (ac == 2 && atoi(av[1]))
 	{
+		set_no_flags(flags);
 		flags->test_num = atoi(av[1]);
 		return ;
 	}
-	if (ac == 2)
+	if (ac == 2 && (strcmp(av[1], "m") == 0 || strcmp(av[1], "b") == 0))
 	{
 		set_default(flags);
 		if (strcmp(av[1], "m"))
