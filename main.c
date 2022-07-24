@@ -6,7 +6,7 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:09:14 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/24 13:04:53 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 14:23:31 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static void	get_specific_flags(int ac, char **av, t_flags *flags)
 			flags->x = 1;
 		if (strcmp(av[ac], "X") == 0)
 			flags->X = 1;
+		if (strcmp(av[ac], "%") == 0)
+			flags->percent = 1;
 	}
 }
 
@@ -85,7 +87,7 @@ static void	parse_flags(int ac, char **av, t_flags *flags)
 	if (ac == 2 && (strcmp(av[1], "m") == 0 || strcmp(av[1], "b") == 0))
 	{
 		set_default(flags);
-		if (strcmp(av[1], "m"))
+		if (strcmp(av[1], "m") == 0)
 			flags->bonus = 0;
 		return ;
 	}

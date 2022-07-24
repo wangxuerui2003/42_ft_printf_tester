@@ -5,4 +5,5 @@ tester
 myleaks.txt
 user_err.txt
 .DS_Store
+printf_tester_src/
 
