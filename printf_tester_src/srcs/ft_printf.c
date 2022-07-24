@@ -6,7 +6,7 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:52:26 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/24 13:06:08 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 13:14:23 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	ft_printf(const char *format, ...)
 	// temp[0] = 0;
 	// while (1)
 	// 	;
-	char	*temp = malloc(10);
-	temp = NULL;
+	// char	*temp = malloc(10);
+	// temp = NULL;
 	if (!format)
 		return (0);
 	va_start(args, format);

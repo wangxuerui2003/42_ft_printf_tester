@@ -6,7 +6,7 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:51:24 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/24 13:05:31 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 13:12:06 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -491,7 +491,7 @@ void	run_test(t_flags *flags, t_status *status)
 	TEST(status, should_test(flags, status), ("%.9u", (unsigned int)-1));
 	TEST(status, should_test(flags, status), ("%.10u", (unsigned int)-1));
 	TEST(status, should_test(flags, status), ("%.11u", (unsigned int)-1));
-	TEST(status, should_test(flags, status), ("%.10uis a big number", (unsigned int)-1))
+	TEST(status, should_test(flags, status), ("%.10uis a big number", (unsigned int)-1));
 	TEST(status, should_test(flags, status), ("%.0uis a big number", (unsigned int)-1));
 	TEST(status, should_test(flags, status), ("%.4us a big number", (unsigned int)-1));
 	TEST(status, should_test(flags, status), ("%.9uxs a big number", (unsigned int)-1));

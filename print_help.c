@@ -6,7 +6,7 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:49:03 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/23 17:26:21 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 13:18:55 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	print_help(t_status *status, t_result *stdresult, t_result *userresult)
 	printf("[%s]\treturn: %d\n", userresult->output, userresult->return_value);
 	printf(RESET "Your test is runned by: [ft_printf%s]\n", status->test_params);
 	printf("You can rerun this test by " YELLOW);
-	printf("sh start %d.\n" RESET, status->current_test);
+	printf("sh start %d.\n\n", status->current_test);
+	ft_putstr_fd(RESET, 1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:30:12 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/24 13:07:55 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 13:35:02 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,32 @@ int	should_test(t_flags *flags, t_status *status)
 	return (0);
 }
 
-void	prepare_redir(int fd[2])
+void	prepare_redir(int fd[2], int return_fd[2])
 {
 	close(fd[READ]);
+	close(return_fd[READ]);
 	dup2(fd[WRITE], STDOUT_FILENO);
 }
 
-void	get_result(t_result *result, int fd[2])
+void	get_result(t_result *result, int fd[2], int return_fd[2])
 {
 	char	*temp;
+	char	*temp2;
 	int		byteread;
 
 	temp = malloc((BUFFER + 1) * sizeof(char));
 	close(fd[WRITE]);
+	close(return_fd[WRITE]);
 	byteread = read(fd[READ], temp, BUFFER);
 	temp[byteread] = '\0';
 	result->output = temp;
+	temp2 = malloc((BUFFER + 1) * sizeof(char));
+	byteread = read(return_fd[READ], temp2, BUFFER);
+	temp2[byteread] = '\0';
+	result->return_value = atoi(temp2);
+	free(temp2);
 	close(fd[READ]);
+	close(return_fd[READ]);
 }
 
 int	check_result(t_status *status, int exitpid,
