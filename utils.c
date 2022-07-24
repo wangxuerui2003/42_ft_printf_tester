@@ -6,12 +6,13 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:30:12 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/24 13:35:02 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 15:48:48 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tester_header.h"
 
+/*set all status to default*/
 void	init_status(t_status *status)
 {
 	status->current_test = 0;
@@ -19,7 +20,7 @@ void	init_status(t_status *status)
 	status->tests_correct = 0;
 	status->tests_runned = 0;
 }
-
+/*check if a test should be tested*/
 int	should_test(t_flags *flags, t_status *status)
 {
 	if (flags->test_num != 0 && flags->test_num == status->current_test)
@@ -31,6 +32,7 @@ int	should_test(t_flags *flags, t_status *status)
 	return (0);
 }
 
+/*prepare pipes for redirecting STDOUT to the pipe*/
 void	prepare_redir(int fd[2], int return_fd[2])
 {
 	close(fd[READ]);
@@ -38,6 +40,7 @@ void	prepare_redir(int fd[2], int return_fd[2])
 	dup2(fd[WRITE], STDOUT_FILENO);
 }
 
+/*get the output and return value from the pipes*/
 void	get_result(t_result *result, int fd[2], int return_fd[2])
 {
 	char	*temp;
@@ -59,6 +62,7 @@ void	get_result(t_result *result, int fd[2], int return_fd[2])
 	close(return_fd[READ]);
 }
 
+/*check errors*/
 int	check_result(t_status *status, int exitpid,
 	t_result *stdresult, t_result *userresult)
 {

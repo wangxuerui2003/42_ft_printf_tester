@@ -6,7 +6,7 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:09:14 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/24 14:23:31 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 15:49:36 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ static void	parse_flags(int ac, char **av, t_flags *flags)
 	get_specific_flags(ac, av, flags);
 }
 
-/* Main logic of the tester */
+/* Main logic of the tester
+ * init flags and status, run the tests, and print the score
+ */
 int	main(int ac, char **av)
 {
 	t_flags		*flags;
