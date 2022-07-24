@@ -6,7 +6,7 @@
 #    By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 10:31:28 by wxuerui           #+#    #+#              #
-#    Updated: 2022/07/23 22:03:33 by wxuerui          ###   ########.fr        #
+#    Updated: 2022/07/24 10:40:39 by wxuerui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@
 NAME	= tester
 LIBFTPRINTF_DIR = printf_tester_src/
 LIBFTPRINTF = $(LIBFTPRINTF_DIR)libftprintf.a
-CC	= gcc
+CC	= clang
 HEADER = -I tester_header.h
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS	= -Wall -Werror -Wextra
 OBJS_DIR	= objs/
 
 # Colors
@@ -34,7 +34,7 @@ WHITE = \033[0;97m
 
 #sources
 
-SRC_FILES	=	main run_test print_help utils utils2 get_file_content
+SRC_FILES	=	main run_test print_help utils utils2 get_file_content malloc_count
 
 SRCS	= $(addsuffix .c, $(SRC_FILES))
 OBJS	= $(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -48,11 +48,11 @@ $(OBJS_DIR)%.o: %.c
 
 $(NAME):	mkdir_objs $(OBJS)
 			make -C $(LIBFTPRINTF_DIR)
-			$(CC) $(CFLAGS) $(HEADER) $(LIBFTPRINTF) -o $(NAME) $(OBJS)
+			$(CC) $(CFLAGS) $(HEADER) -L$(LIBFTPRINTF_DIR) -o $(NAME) $(OBJS) -lftprintf -ldl
 
 bonus:		mkdir_objs $(OBJS)
 			make -C $(LIBFTPRINTF_DIR) bonus
-			$(CC) $(CFLAGS) $(HEADER) $(LIBFTPRINTF) -o $(NAME) $(OBJS)
+			$(CC) $(CFLAGS) $(HEADER) -L$(LIBFTPRINTF_DIR) -o $(NAME) $(OBJS) -lftprintf -ldl
 
 mkdir_objs:
 			@mkdir -p $(OBJS_DIR)

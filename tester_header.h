@@ -6,7 +6,7 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:09:38 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/23 22:11:38 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 10:39:13 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,11 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 		sigaction(SIGSEGV, &sa, NULL); \
 		sigaction(SIGABRT, &sa, NULL); \
 		prepare_redir(fd); \
+		int err = open("user_err.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644); \
+		dup2(err, STDERR_FILENO); \
 		userresult->return_value = ft_printf params; \
 		close(fd[WRITE]); \
+		close(err); \
 		exit(0); \
 	} \
 	timeout_checker = fork(); \
@@ -152,13 +155,18 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 		exit_sig = SIGKILL; \
 	} \
 	get_result(userresult, fd); \
-	if (ft_strnstr(userresult->output, "leaks", ft_strlen(userresult->output)) != NULL) \
+	int	err_fd = open("user_err.txt", O_RDONLY); \
+	char	*leaks_info = get_file_content(err_fd); \
+	if (ft_strnstr(leaks_info, "current: 1,097", ft_strlen(leaks_info)) == NULL) \
+	{ \
 		exit_sig = LEAKS_ERROR; \
+	} \
+	free(leaks_info); \
+	close(err_fd); \
 	status->test_params = #params; \
 	status->tests_correct += check_result(status, exit_sig, stdresult, userresult); \
 	free(stdresult->output); \
-	if (exitpid != 0) \
-		free(userresult->output); \
+	free(userresult->output); \
 	free(stdresult); \
 	free(userresult); \
 }

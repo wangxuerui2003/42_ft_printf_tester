@@ -6,7 +6,7 @@
 /*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:09:14 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/23 22:03:22 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/24 10:38:51 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int	main(int ac, char **av)
 		printf(RED);
 	printf("%d%%\n", status->tests_correct * 100 / status->tests_runned);
 	ft_putstr_fd(RESET, 1);
+	free(status);
+	free(flags);
 	//system("leaks tester");
 	return (0);
 }
