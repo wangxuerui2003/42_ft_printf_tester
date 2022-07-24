@@ -38,8 +38,7 @@ And in the repository, run:
 
 ## Bonus scene
 Install python3 if you don't have and run the following commands in your terminal:
-* `pip3 install pillow`
-* `pip3 install color-it`
+* sh bonus_scene
 * Try making a compilation error
 
 To my friend Sean (another contributor to this tester)
