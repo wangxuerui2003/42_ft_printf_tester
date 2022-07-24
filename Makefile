@@ -6,7 +6,7 @@
 #    By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 10:31:28 by wxuerui           #+#    #+#              #
-#    Updated: 2022/07/24 10:40:39 by wxuerui          ###   ########.fr        #
+#    Updated: 2022/07/24 11:04:00 by wxuerui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME	= tester
 LIBFTPRINTF_DIR = printf_tester_src/
 LIBFTPRINTF = $(LIBFTPRINTF_DIR)libftprintf.a
-CC	= clang
+CC	= gcc
 HEADER = -I tester_header.h
 CFLAGS	= -Wall -Werror -Wextra
 OBJS_DIR	= objs/
